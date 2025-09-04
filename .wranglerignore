@@ -1,0 +1,6 @@
+# Exclude large cache files from Wrangler deployment
+.next/cache/
+.next/trace
+node_modules/
+.env*
+*.log

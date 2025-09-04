@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /auth/callback
+Disallow: /_next/
+Disallow: /private/
+
+Sitemap: https://career.fortisledger.io/sitemap.xml
