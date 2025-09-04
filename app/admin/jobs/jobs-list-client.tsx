@@ -100,24 +100,26 @@ export function JobsListClient({ jobs }: JobsListClientProps) {
         {jobList.map((job) => (
           <Card key={job.id} className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
             <CardContent className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0">
                   <Building2 className="w-6 h-6 text-white" />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
                     <h3 className="font-semibold text-lg text-white">{job.title}</h3>
-                    {job.is_featured && (
-                      <Badge className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0">
-                        Featured
+                    <div className="flex items-center gap-2">
+                      {job.is_featured && (
+                        <Badge className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0">
+                          Featured
+                        </Badge>
+                      )}
+                      <Badge variant={job.is_active ? "default" : "secondary"} className="border-0">
+                        {job.is_active ? "Active" : "Inactive"}
                       </Badge>
-                    )}
-                    <Badge variant={job.is_active ? "default" : "secondary"} className="border-0">
-                      {job.is_active ? "Active" : "Inactive"}
-                    </Badge>
+                    </div>
                   </div>
                   <p className="text-slate-300 mb-2">{job.company_name || "Company"}</p>
-                  <div className="flex items-center gap-4 text-sm text-slate-400">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm text-slate-400">
                     <span className="capitalize">{job.employment_type}</span>
                     <span className="capitalize">{job.experience_level} level</span>
                     <span>{job.location}</span>
@@ -129,35 +131,38 @@ export function JobsListClient({ jobs }: JobsListClientProps) {
                     <span>Views: {job.view_count || 0}</span>
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 sm:flex-col sm:gap-2 sm:flex-shrink-0">
                   <Button
                     variant="outline"
                     size="sm"
                     asChild
-                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 flex-1 sm:flex-none"
                   >
-                    <Link href={`/jobs/${job.id}`}>
+                    <Link href={`/jobs/${job.id}`} className="flex items-center justify-center gap-2">
                       <Eye className="w-4 h-4" />
+                      <span className="sm:hidden">View</span>
                     </Link>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     asChild
-                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 flex-1 sm:flex-none"
                   >
-                    <Link href={`/admin/jobs/${job.id}/edit`}>
+                    <Link href={`/admin/jobs/${job.id}/edit`} className="flex items-center justify-center gap-2">
                       <Edit className="w-4 h-4" />
+                      <span className="sm:hidden">Edit</span>
                     </Link>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 flex-1 sm:flex-none"
                     onClick={() => handleDelete(job.id, job.title)}
                     disabled={isDeleting === job.id}
                   >
                     <Trash2 className="w-4 h-4" />
+                    <span className="sm:hidden">Delete</span>
                   </Button>
                 </div>
               </div>
