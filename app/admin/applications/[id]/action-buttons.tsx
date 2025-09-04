@@ -134,29 +134,29 @@ export function ActionButtons({ applicationId, applicantEmail, applicantName }: 
   return (
     <div className="space-y-4">
       {/* Action Buttons */}
-      <div className="flex justify-center gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
         <Button
           variant="outline"
-          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 text-sm"
           onClick={() => setShowScheduleForm(!showScheduleForm)}
         >
-          <Clock className="w-4 h-4 mr-2" />
+          <Clock className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
           Schedule Interview
         </Button>
         <Button
           variant="outline"
-          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 text-sm"
           onClick={() => setShowEmailForm(!showEmailForm)}
         >
-          <Mail className="w-4 h-4 mr-2" />
+          <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
           Send Email
         </Button>
         <Button
           variant="outline"
-          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 text-sm"
           onClick={() => setShowNotesForm(!showNotesForm)}
         >
-          <MessageSquare className="w-4 h-4 mr-2" />
+          <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
           Add Notes
         </Button>
       </div>
@@ -169,35 +169,35 @@ export function ActionButtons({ applicationId, applicantEmail, applicantName }: 
           </CardHeader>
           <CardContent>
             <form onSubmit={handleScheduleInterview} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="date" className="text-slate-300">Date</Label>
+                  <Label htmlFor="date" className="text-slate-300 text-sm">Date</Label>
                   <Input
                     id="date"
                     name="date"
                     type="date"
                     required
-                    className="bg-slate-700/50 border-slate-600 text-white"
+                    className="bg-slate-700/50 border-slate-600 text-white text-sm"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="time" className="text-slate-300">Time</Label>
+                  <Label htmlFor="time" className="text-slate-300 text-sm">Time</Label>
                   <Input
                     id="time"
                     name="time"
                     type="time"
                     required
-                    className="bg-slate-700/50 border-slate-600 text-white"
+                    className="bg-slate-700/50 border-slate-600 text-white text-sm"
                   />
                 </div>
               </div>
               <div>
-                <Label htmlFor="type" className="text-slate-300">Interview Type</Label>
+                <Label htmlFor="type" className="text-slate-300 text-sm">Interview Type</Label>
                 <select
                   id="type"
                   name="type"
                   required
-                  className="w-full p-2 bg-slate-700/50 border border-slate-600 text-white rounded-md"
+                  className="w-full p-2 bg-slate-700/50 border border-slate-600 text-white rounded-md text-sm"
                 >
                   <option value="phone">Phone Call</option>
                   <option value="video">Video Call</option>
@@ -205,24 +205,24 @@ export function ActionButtons({ applicationId, applicantEmail, applicantName }: 
                 </select>
               </div>
               <div>
-                <Label htmlFor="notes" className="text-slate-300">Notes</Label>
+                <Label htmlFor="notes" className="text-slate-300 text-sm">Notes</Label>
                 <Textarea
                   id="notes"
                   name="notes"
                   placeholder="Any additional notes for the interview..."
-                  className="bg-slate-700/50 border-slate-600 text-white"
+                  className="bg-slate-700/50 border-slate-600 text-white text-sm"
                   rows={3}
                 />
               </div>
-              <div className="flex gap-2">
-                <Button type="submit" disabled={isLoading} className="bg-blue-600 hover:bg-blue-700">
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <Button type="submit" disabled={isLoading} className="bg-blue-600 hover:bg-blue-700 text-sm">
                   {isLoading ? "Scheduling..." : "Schedule Interview"}
                 </Button>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setShowScheduleForm(false)}
-                  className="bg-slate-700/50 border-slate-600 text-slate-300"
+                  className="bg-slate-700/50 border-slate-600 text-slate-300 text-sm"
                 >
                   Cancel
                 </Button>
@@ -241,35 +241,35 @@ export function ActionButtons({ applicationId, applicantEmail, applicantName }: 
           <CardContent>
             <form onSubmit={handleSendEmail} className="space-y-4">
               <div>
-                <Label htmlFor="subject" className="text-slate-300">Subject</Label>
+                <Label htmlFor="subject" className="text-slate-300 text-sm">Subject</Label>
                 <Input
                   id="subject"
                   name="subject"
                   placeholder="Email subject..."
                   required
-                  className="bg-slate-700/50 border-slate-600 text-white"
+                  className="bg-slate-700/50 border-slate-600 text-white text-sm"
                 />
               </div>
               <div>
-                <Label htmlFor="message" className="text-slate-300">Message</Label>
+                <Label htmlFor="message" className="text-slate-300 text-sm">Message</Label>
                 <Textarea
                   id="message"
                   name="message"
                   placeholder="Your message to the applicant..."
                   required
-                  className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                  className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 text-sm"
                   rows={5}
                 />
               </div>
-              <div className="flex gap-2">
-                <Button type="submit" disabled={isLoading} className="bg-green-600 hover:bg-green-700">
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <Button type="submit" disabled={isLoading} className="bg-green-600 hover:bg-green-700 text-sm">
                   {isLoading ? "Sending..." : "Send Email"}
                 </Button>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setShowEmailForm(false)}
-                  className="bg-slate-700/50 border-slate-600 text-slate-300"
+                  className="bg-slate-700/50 border-slate-600 text-slate-300 text-sm"
                 >
                   Cancel
                 </Button>
@@ -288,25 +288,25 @@ export function ActionButtons({ applicationId, applicantEmail, applicantName }: 
           <CardContent>
             <form onSubmit={handleAddNotes} className="space-y-4">
               <div>
-                <Label htmlFor="notes" className="text-slate-300">Notes</Label>
+                <Label htmlFor="notes" className="text-slate-300 text-sm">Notes</Label>
                 <Textarea
                   id="notes"
                   name="notes"
                   placeholder="Add your notes about this application..."
                   required
-                  className="bg-slate-700/50 border-slate-600 text-white"
+                  className="bg-slate-700/50 border-slate-600 text-white text-sm"
                   rows={4}
                 />
               </div>
-              <div className="flex gap-2">
-                <Button type="submit" disabled={isLoading} className="bg-purple-600 hover:bg-purple-700">
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <Button type="submit" disabled={isLoading} className="bg-purple-600 hover:bg-purple-700 text-sm">
                   {isLoading ? "Adding..." : "Add Notes"}
                 </Button>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setShowNotesForm(false)}
-                  className="bg-slate-700/50 border-slate-600 text-slate-300"
+                  className="bg-slate-700/50 border-slate-600 text-slate-300 text-sm"
                 >
                   Cancel
                 </Button>

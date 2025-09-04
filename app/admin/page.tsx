@@ -170,43 +170,43 @@ export default async function AdminDashboard() {
       
       {/* Content Wrapper */}
       <div className="relative z-10">
-      {/* Header */}
-      <header className="border-b border-white/20 bg-white/10 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 min-w-0 flex-1">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+        {/* Header */}
+        <header className="border-b border-white/20 bg-white/10 backdrop-blur-sm">
+          <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-lg sm:text-xl font-bold text-white truncate">
+                    FortisLedger Admin
+                  </h1>
+                  <p className="text-xs text-slate-300 hidden sm:block">Career Portal Management</p>
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <h1 className="text-lg sm:text-xl font-bold text-white truncate">
-                  FortisLedger Admin
-                </h1>
-                <p className="text-xs text-slate-300 hidden sm:block">Career Portal Management</p>
+              <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                <Badge variant="outline" className="bg-green-500/20 text-green-300 border-green-500/30 hidden sm:inline-flex">
+                  Admin Access
+                </Badge>
+                <Button
+                  variant="outline"
+                  asChild
+                  size="sm"
+                  className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 text-xs sm:text-sm"
+                >
+                  <Link href="/">
+                    <span className="hidden sm:inline">View Portal</span>
+                    <span className="sm:hidden">Portal</span>
+                  </Link>
+                </Button>
               </div>
-            </div>
-            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-              <Badge variant="outline" className="bg-green-500/20 text-green-300 border-green-500/30 hidden sm:inline-flex">
-                Admin Access
-              </Badge>
-              <Button
-                variant="outline"
-                asChild
-                size="sm"
-                className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 text-xs sm:text-sm"
-              >
-                <Link href="/">
-                  <span className="hidden sm:inline">View Portal</span>
-                  <span className="sm:hidden">Portal</span>
-                </Link>
-              </Button>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="space-y-8">
+                 <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+          <div className="space-y-8">
           {/* Welcome Section */}
           <div>
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 text-white">Welcome back, {user.email?.split("@")[0]}</h1>
@@ -379,26 +379,28 @@ export default async function AdminDashboard() {
                   {recentApplications.map((application: any) => (
                     <div
                       key={application.id}
-                      className="flex items-center justify-between p-4 border border-slate-700 rounded-lg bg-slate-700/30"
+                      className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between p-3 sm:p-4 border border-slate-700 rounded-lg bg-slate-700/30"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-medium">
+                      <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-medium text-sm sm:text-base flex-shrink-0">
                           {application.profiles?.full_name?.charAt(0) || "U"}
                         </div>
-                        <div>
-                          <p className="font-medium text-white">{application.profiles?.full_name || "Unknown User"}</p>
-                          <p className="text-sm text-slate-300">
-                            Applied for <span className="text-cyan-400">{application.jobs?.title}</span> at{" "}
-                            <span className="text-purple-400">{application.jobs?.companies?.name || "Unknown Company"}</span>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium text-white text-sm sm:text-base truncate">{application.profiles?.full_name || "Unknown User"}</p>
+                          <p className="text-xs sm:text-sm text-slate-300">
+                            Applied for <span className="text-cyan-400">{application.jobs?.title}</span>
+                          </p>
+                          <p className="text-xs sm:text-sm text-slate-300">
+                            at <span className="text-purple-400">{application.jobs?.companies?.[0]?.name || "Unknown Company"}</span>
                           </p>
                           <p className="text-xs text-slate-400">
                             {new Date(application.applied_at).toLocaleDateString()}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-between sm:justify-end gap-2 sm:flex-shrink-0">
                         <Badge
-                          className={statusColors[application.status as keyof typeof statusColors]}
+                          className={`${statusColors[application.status as keyof typeof statusColors]} text-xs`}
                           variant="outline"
                         >
                           {application.status}
@@ -407,10 +409,11 @@ export default async function AdminDashboard() {
                           variant="outline"
                           size="sm"
                           asChild
-                          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+                          className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 px-2 sm:px-3"
                         >
                           <Link href={`/admin/applications/${application.id}`}>
-                            <Eye className="w-4 h-4" />
+                            <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                            <span className="ml-1 text-xs sm:hidden">View</span>
                           </Link>
                         </Button>
                       </div>
@@ -530,8 +533,8 @@ export default async function AdminDashboard() {
               </CardContent>
             </Card>
           </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   )

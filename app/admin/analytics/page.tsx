@@ -1,9 +1,10 @@
 import { createServerClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Download, TrendingUp, Users, Briefcase, FileText } from "lucide-react"
+import { Download, TrendingUp, Users, Briefcase, FileText, ArrowLeft, Sparkles } from "lucide-react"
 import { redirect } from "next/navigation"
 import { AnalyticsCharts } from "@/components/analytics-charts"
+import Link from "next/link"
 
 export const dynamic = "force-dynamic"
 
@@ -108,83 +109,106 @@ export default async function AnalyticsPage() {
       <div className="absolute bottom-40 right-20 w-64 h-64 bg-gradient-to-r from-pink-500/40 to-purple-500/40 rounded-full blur-3xl animate-pulse delay-500" />
       
       {/* Content Wrapper */}
-      <div className="relative z-10 p-6">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="relative z-10">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold text-white mb-2">Analytics Dashboard</h1>
-            <p className="text-slate-300">Comprehensive insights into your career portal performance</p>
+        <header className="border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
+          <div className="container mx-auto px-3 sm:px-4 py-4">
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="sm" asChild className="text-slate-300 hover:text-white">
+                <Link href="/admin" className="flex items-center gap-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  <span className="hidden sm:inline">Admin Dashboard</span>
+                  <span className="sm:hidden">Back</span>
+                </Link>
+              </Button>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-bold text-white">Analytics Dashboard</span>
+              </div>
+            </div>
           </div>
-          <Button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600">
-            <Download className="w-4 h-4 mr-2" />
-            Export Report
-          </Button>
+        </header>
+
+        <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+          <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
+            {/* Page Header */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">Analytics Dashboard</h1>
+                <p className="text-slate-300 text-sm sm:text-base">Comprehensive insights into your career portal performance</p>
+              </div>
+              <Button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 w-full sm:w-auto">
+                <Download className="w-4 h-4 mr-2" />
+                <span className="text-sm sm:text-base">Export Report</span>
+              </Button>
+            </div>
+
+            {/* Key Metrics */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Total Applications</CardTitle>
+                  <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-cyan-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-xl sm:text-2xl font-bold text-white">{totalApplications}</div>
+                  <p className="text-xs text-slate-400">
+                    <TrendingUp className="inline w-3 h-3 mr-1" />
+                    +12% from last month
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Registered Users</CardTitle>
+                  <Users className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-xl sm:text-2xl font-bold text-white">{totalUsers}</div>
+                  <p className="text-xs text-slate-400">
+                    <TrendingUp className="inline w-3 h-3 mr-1" />
+                    +8% from last month
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Active Jobs</CardTitle>
+                  <Briefcase className="h-3 w-3 sm:h-4 sm:w-4 text-purple-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-xl sm:text-2xl font-bold text-white">{totalJobs}</div>
+                  <p className="text-xs text-slate-400">
+                    <TrendingUp className="inline w-3 h-3 mr-1" />
+                    +3 new this week
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-xs sm:text-sm font-medium text-slate-300">Avg Apps/Job</CardTitle>
+                  <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-orange-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-xl sm:text-2xl font-bold text-white">{avgApplicationsPerJob}</div>
+                  <p className="text-xs text-slate-400">Applications per position</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Charts */}
+            <AnalyticsCharts
+              processedTrends={processedTrends}
+              statusDistribution={statusDistribution}
+              jobMetrics={jobMetrics}
+            />
+          </div>
         </div>
-
-        {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-slate-300">Total Applications</CardTitle>
-              <FileText className="h-4 w-4 text-cyan-400" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{totalApplications}</div>
-              <p className="text-xs text-slate-400">
-                <TrendingUp className="inline w-3 h-3 mr-1" />
-                +12% from last month
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-slate-300">Registered Users</CardTitle>
-              <Users className="h-4 w-4 text-green-400" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{totalUsers}</div>
-              <p className="text-xs text-slate-400">
-                <TrendingUp className="inline w-3 h-3 mr-1" />
-                +8% from last month
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-slate-300">Active Jobs</CardTitle>
-              <Briefcase className="h-4 w-4 text-purple-400" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{totalJobs}</div>
-              <p className="text-xs text-slate-400">
-                <TrendingUp className="inline w-3 h-3 mr-1" />
-                +3 new this week
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-slate-300">Avg Apps/Job</CardTitle>
-              <TrendingUp className="h-4 w-4 text-orange-400" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-white">{avgApplicationsPerJob}</div>
-              <p className="text-xs text-slate-400">Applications per position</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Charts */}
-        <AnalyticsCharts
-          processedTrends={processedTrends}
-          statusDistribution={statusDistribution}
-          jobMetrics={jobMetrics}
-        />
-      </div>
       </div>
     </div>
   )

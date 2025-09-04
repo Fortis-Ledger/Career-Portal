@@ -97,31 +97,32 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
       <div className="relative z-10">
         {/* Header */}
         <header className="border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" asChild className="text-slate-300 hover:text-white">
+          <div className="container mx-auto px-3 sm:px-4 py-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <Button variant="ghost" size="sm" asChild className="text-slate-300 hover:text-white w-fit">
                 <Link href="/admin/applications" className="flex items-center gap-2">
                   <ArrowLeft className="w-4 h-4" />
-                  Back to Applications
+                  <span className="hidden sm:inline">Back to Applications</span>
+                  <span className="sm:hidden">Back</span>
                 </Link>
               </Button>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
-                <span className="font-bold text-white">Application Review</span>
+                <span className="font-bold text-white text-sm sm:text-base">Application Review</span>
               </div>
             </div>
           </div>
         </header>
 
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
           <div className="space-y-6">
             {/* Application Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h1 className="text-3xl font-bold text-white">Application Review</h1>
-                <p className="text-slate-300">
+                <h1 className="text-2xl sm:text-3xl font-bold text-white">Application Review</h1>
+                <p className="text-slate-300 text-sm sm:text-base">
                   Reviewing application for {job?.title} position
                 </p>
               </div>
@@ -131,71 +132,71 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
                />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* Applicant Information */}
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm md:col-span-2 lg:col-span-1">
                 <CardHeader>
-                  <CardTitle className="text-white">Applicant Information</CardTitle>
+                  <CardTitle className="text-white text-base sm:text-lg">Applicant Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg sm:text-xl flex-shrink-0">
                       {profile?.full_name?.charAt(0) || "U"}
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-white">{profile?.full_name || "Unknown"}</h3>
-                      <p className="text-slate-300">{profile?.email}</p>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base sm:text-lg font-semibold text-white truncate">{profile?.full_name || "Unknown"}</h3>
+                      <p className="text-slate-300 text-sm truncate">{profile?.email}</p>
                     </div>
                   </div>
                   
                   <div className="space-y-2">
                     {profile?.phone && (
-                      <div className="flex items-center gap-2 text-slate-300">
-                        <User className="w-4 h-4" />
-                        <span>{profile.phone}</span>
+                      <div className="flex items-center gap-2 text-slate-300 text-sm">
+                        <User className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                        <span className="truncate">{profile.phone}</span>
                       </div>
                     )}
                     {profile?.location && (
-                      <div className="flex items-center gap-2 text-slate-300">
-                        <Building2 className="w-4 h-4" />
-                        <span>{profile.location}</span>
+                      <div className="flex items-center gap-2 text-slate-300 text-sm">
+                        <Building2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                        <span className="truncate">{profile.location}</span>
                       </div>
                     )}
                     {profile?.bio && (
-                      <p className="text-slate-300 text-sm">{profile.bio}</p>
+                      <p className="text-slate-300 text-xs sm:text-sm line-clamp-3">{profile.bio}</p>
                     )}
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
                     {profile?.resume_url && (
-                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300">
+                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300 text-xs sm:text-sm">
                         <a href={profile.resume_url} target="_blank" rel="noopener noreferrer">
-                          <FileText className="w-4 h-4 mr-2" />
+                          <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                           View Resume
                         </a>
                       </Button>
                     )}
                     {profile?.linkedin_url && (
-                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300">
+                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300 text-xs sm:text-sm">
                         <a href={profile.linkedin_url} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          LinkedIn Profile
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                          LinkedIn
                         </a>
                       </Button>
                     )}
                     {profile?.portfolio_url && (
-                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300">
+                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300 text-xs sm:text-sm">
                         <a href={profile.portfolio_url} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                           Portfolio
                         </a>
                       </Button>
                     )}
                     {profile?.github_url && (
-                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300">
+                      <Button variant="outline" size="sm" asChild className="w-full bg-slate-700/50 border-slate-600 text-slate-300 text-xs sm:text-sm">
                         <a href={profile.github_url} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          GitHub Profile
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                          GitHub
                         </a>
                       </Button>
                     )}
@@ -206,48 +207,48 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
               {/* Job Information */}
               <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle className="text-white">Job Details</CardTitle>
+                  <CardTitle className="text-white text-base sm:text-lg">Job Details</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-white">{job?.title}</h3>
-                    <p className="text-slate-300">{job?.companies?.name}</p>
+                    <h3 className="text-base sm:text-lg font-semibold text-white">{job?.title}</h3>
+                    <p className="text-slate-300 text-sm">{job?.companies?.[0]?.name}</p>
                   </div>
                   
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <Building2 className="w-4 h-4" />
-                      <span>{job?.employment_type} • {job?.experience_level}</span>
+                    <div className="flex items-center gap-2 text-slate-300 text-sm">
+                      <Building2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                      <span className="truncate">{job?.employment_type} • {job?.experience_level}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <Calendar className="w-4 h-4" />
-                      <span>{job?.location} {job?.is_remote && "(Remote)"}</span>
+                    <div className="flex items-center gap-2 text-slate-300 text-sm">
+                      <Calendar className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                      <span className="truncate">{job?.location} {job?.is_remote && "(Remote)"}</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Application Details */}
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm md:col-span-2 lg:col-span-1">
                 <CardHeader>
-                  <CardTitle className="text-white">Application Details</CardTitle>
+                  <CardTitle className="text-white text-base sm:text-lg">Application Details</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <Calendar className="w-4 h-4" />
+                    <div className="flex items-center gap-2 text-slate-300 text-sm">
+                      <Calendar className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                       <span>Applied: {new Date(application.applied_at).toLocaleDateString()}</span>
                     </div>
-                                         <div className="flex items-center gap-2 text-slate-300">
-                       <FileText className="w-4 h-4" />
+                    <div className="flex items-center gap-2 text-slate-300 text-sm">
+                       <FileText className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                        <span>Status: {application.status}</span>
                      </div>
                   </div>
 
                   {application.cover_letter && (
                     <div>
-                      <h4 className="font-medium text-white mb-2">Cover Letter</h4>
-                      <div className="bg-slate-700/50 rounded-lg p-3 text-sm text-slate-300 max-h-40 overflow-y-auto">
+                      <h4 className="font-medium text-white mb-2 text-sm sm:text-base">Cover Letter</h4>
+                      <div className="bg-slate-700/50 rounded-lg p-3 text-xs sm:text-sm text-slate-300 max-h-32 sm:max-h-40 overflow-y-auto">
                         {application.cover_letter}
                       </div>
                     </div>
@@ -255,8 +256,8 @@ export default async function ApplicationDetailPage({ params }: { params: { id: 
 
                   {application.additional_info && (
                     <div>
-                      <h4 className="font-medium text-white mb-2">Additional Information</h4>
-                      <p className="text-sm text-slate-300">{application.additional_info}</p>
+                      <h4 className="font-medium text-white mb-2 text-sm sm:text-base">Additional Information</h4>
+                      <p className="text-xs sm:text-sm text-slate-300">{application.additional_info}</p>
                     </div>
                   )}
                 </CardContent>

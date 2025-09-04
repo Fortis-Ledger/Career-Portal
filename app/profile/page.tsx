@@ -111,27 +111,28 @@ export default async function ProfilePage() {
       <div className="relative z-10">
       {/* Header */}
       <header className="border-b border-border/50 bg-background/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" asChild>
+        <div className="container mx-auto px-3 sm:px-4 py-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <Button variant="ghost" size="sm" asChild className="px-2 sm:px-3">
                 <Link href="/" className="flex items-center gap-2">
                   <ArrowLeft className="w-4 h-4" />
-                  Home
+                  <span className="hidden sm:inline">Home</span>
+                  <span className="sm:hidden">Back</span>
                 </Link>
               </Button>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                 </div>
-                <span className="font-bold">FortisLedger</span>
+                <span className="font-bold text-sm sm:text-base">FortisLedger</span>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Button variant="outline" asChild>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+              <Button variant="outline" asChild size="sm" className="text-xs sm:text-sm">
                 <Link href="/applications">My Applications</Link>
               </Button>
-              <Button variant="outline" asChild>
+              <Button variant="outline" asChild size="sm" className="text-xs sm:text-sm">
                 <Link href="/jobs">Browse Jobs</Link>
               </Button>
             </div>

@@ -116,33 +116,34 @@ export default async function AdminApplicationsPage() {
       {/* Header */}
       <header className="border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" asChild className="text-slate-300 hover:text-white">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <Button variant="ghost" size="sm" asChild className="text-slate-300 hover:text-white w-fit">
               <Link href="/admin" className="flex items-center gap-2">
                 <ArrowLeft className="w-4 h-4" />
-                Admin Dashboard
+                <span className="hidden sm:inline">Admin Dashboard</span>
+                <span className="sm:hidden">Back</span>
               </Link>
             </Button>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-white">Application Management</span>
+              <span className="font-bold text-white text-sm sm:text-base">Application Management</span>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <div className="space-y-6">
           {/* Page Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white">Application Management</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">Application Management</h1>
               <p className="text-slate-300">Review and manage job applications</p>
             </div>
-            <div className="flex items-center gap-4">
-              <Badge variant="outline" className="border-slate-600 text-slate-300">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+              <Badge variant="outline" className="border-slate-600 text-slate-300 w-fit">
                 {applications.length} total applications
               </Badge>
               <ExportButton data={applications} filename="applications" type="applications" />
@@ -152,49 +153,51 @@ export default async function AdminApplicationsPage() {
           {/* Filters */}
           <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
             <CardContent className="p-4">
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                   <Input
-                    placeholder="Search by candidate name, job title, or company..."
+                    placeholder="Search candidates, jobs, companies..."
                     className="pl-10 bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
                   />
                 </div>
-                <Select>
-                  <SelectTrigger className="w-48 bg-slate-700/50 border-slate-600 text-white">
-                    <SelectValue placeholder="Filter by status" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-slate-800 border-slate-600">
-                    <SelectItem value="all" className="text-slate-300">
-                      All Statuses
-                    </SelectItem>
-                    <SelectItem value="pending" className="text-slate-300">
-                      Pending
-                    </SelectItem>
-                    <SelectItem value="reviewing" className="text-slate-300">
-                      Reviewing
-                    </SelectItem>
-                    <SelectItem value="interview" className="text-slate-300">
-                      Interview
-                    </SelectItem>
-                    <SelectItem value="offer" className="text-slate-300">
-                      Offer
-                    </SelectItem>
-                    <SelectItem value="rejected" className="text-slate-300">
-                      Rejected
-                    </SelectItem>
-                    <SelectItem value="withdrawn" className="text-slate-300">
-                      Withdrawn
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button
-                  variant="outline"
-                  className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
-                >
-                  <Filter className="w-4 h-4 mr-2" />
-                  More Filters
-                </Button>
+                <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
+                  <Select>
+                    <SelectTrigger className="w-full sm:w-48 bg-slate-700/50 border-slate-600 text-white">
+                      <SelectValue placeholder="Filter by status" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-800 border-slate-600">
+                      <SelectItem value="all" className="text-slate-300">
+                        All Statuses
+                      </SelectItem>
+                      <SelectItem value="pending" className="text-slate-300">
+                        Pending
+                      </SelectItem>
+                      <SelectItem value="reviewing" className="text-slate-300">
+                        Reviewing
+                      </SelectItem>
+                      <SelectItem value="interview" className="text-slate-300">
+                        Interview
+                      </SelectItem>
+                      <SelectItem value="offer" className="text-slate-300">
+                        Offer
+                      </SelectItem>
+                      <SelectItem value="rejected" className="text-slate-300">
+                        Rejected
+                      </SelectItem>
+                      <SelectItem value="withdrawn" className="text-slate-300">
+                        Withdrawn
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    variant="outline"
+                    className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 whitespace-nowrap"
+                  >
+                    <Filter className="w-4 h-4 mr-2" />
+                    More Filters
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -203,50 +206,50 @@ export default async function AdminApplicationsPage() {
           <div className="space-y-4">
             {applications.map((application: any) => (
               <Card key={application.id} className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-medium">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="flex items-start gap-3 sm:gap-4 flex-1">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-medium flex-shrink-0">
                         {application.profiles?.full_name?.charAt(0) || "U"}
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-semibold text-lg text-white">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2 mb-1">
+                          <h3 className="font-semibold text-base sm:text-lg text-white truncate">
                             {application.profiles?.full_name || "Unknown User"}
                           </h3>
                           <Badge
-                            className={`${statusColors[application.status as keyof typeof statusColors]} border-0`}
+                            className={`${statusColors[application.status as keyof typeof statusColors]} border-0 w-fit`}
                           >
                             {application.status}
                           </Badge>
                         </div>
-                        <p className="text-slate-300 mb-2">
+                        <p className="text-slate-300 mb-2 text-sm sm:text-base">
                           Applied for <strong className="text-cyan-400">{application.jobs?.title}</strong> at{" "}
                           <strong className="text-purple-400">{application.jobs?.companies?.name || "Unknown Company"}</strong>
                         </p>
-                        <div className="flex items-center gap-4 text-sm text-slate-400">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4 text-xs sm:text-sm text-slate-400">
                           <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
+                            <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                             {new Date(application.applied_at).toLocaleDateString()}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            {application.profiles?.email}
+                          <div className="flex items-center gap-1 truncate">
+                            <User className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                            <span className="truncate">{application.profiles?.email}</span>
                           </div>
                           {application.profiles?.location && (
                             <div className="flex items-center gap-1">
-                              <span>{application.profiles.location}</span>
+                              <span className="truncate">{application.profiles.location}</span>
                             </div>
                           )}
                         </div>
                       </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 sm:flex-shrink-0">
                       <Button
                         variant="outline"
                         size="sm"
                         asChild
-                        className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50"
+                        className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50 w-full sm:w-auto"
                       >
                         <Link href={`/admin/applications/${application.id}`}>
                           <Eye className="w-4 h-4 mr-2" />

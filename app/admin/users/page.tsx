@@ -144,7 +144,7 @@ export default async function AdminUsersPage() {
                     </div>
                   )}
 
-                  <div className="mt-4 flex gap-2">
+                  <div className="mt-4 flex gap-2 flex-wrap">
                     {user.resume_url && (
                       <Button variant="outline" size="sm" asChild className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50">
                         <a href={user.resume_url} target="_blank" rel="noopener noreferrer">
@@ -156,6 +156,13 @@ export default async function AdminUsersPage() {
                       <Button variant="outline" size="sm" asChild className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50">
                         <a href={user.linkedin_url} target="_blank" rel="noopener noreferrer">
                           LinkedIn
+                        </a>
+                      </Button>
+                    )}
+                    {user.github_url && (
+                      <Button variant="outline" size="sm" asChild className="bg-slate-700/50 border-slate-600 text-slate-300 hover:bg-slate-600/50">
+                        <a href={user.github_url} target="_blank" rel="noopener noreferrer">
+                          GitHub
                         </a>
                       </Button>
                     )}
