@@ -84,8 +84,6 @@ export function EditJobForm({ job, companies, skills }: EditJobFormProps) {
     setIsLoading(true)
 
     try {
-      const supabase = createClient()
-      
       const updateData = {
         title: formData.title,
         description: formData.description,
@@ -99,21 +97,26 @@ export function EditJobForm({ job, companies, skills }: EditJobFormProps) {
         is_active: formData.is_active,
         is_featured: formData.is_featured,
         skill_ids: formData.skill_ids,
-        updated_at: new Date().toISOString(),
       }
 
-      const { error } = await supabase
-        .from("jobs")
-        .update(updateData)
-        .eq("id", job.id)
+      // Use API route for update (bypasses RLS with service role)
+      const response = await fetch(`/api/admin/jobs/${job.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData),
+      })
 
-      if (error) {
-        console.error("Error updating job:", error)
-        alert("Error updating job. Please try again.")
+      const result = await response.json()
+
+      if (!response.ok) {
+        console.error("Update API error:", result.error)
+        alert(`Error updating job: ${result.error}`)
         return
       }
 
-      router.push(`/admin/jobs/${job.id}?success=Job updated successfully`)
+      router.push(`/admin/jobs?success=Job updated successfully`)
     } catch (error) {
       console.error("Error:", error)
       alert("Error updating job. Please try again.")

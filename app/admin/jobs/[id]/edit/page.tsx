@@ -28,7 +28,7 @@ async function getJobAndCompanies(id: string) {
     redirect("/unauthorized")
   }
 
-  // Get job details
+  // Get job details with skills
   const { data: job, error: jobError } = await supabase
     .from("jobs")
     .select(`
@@ -39,6 +39,14 @@ async function getJobAndCompanies(id: string) {
         logo_url,
         industry,
         location
+      ),
+      job_skills (
+        skill_id,
+        skills (
+          id,
+          name,
+          category
+        )
       )
     `)
     .eq("id", id)
@@ -63,8 +71,14 @@ async function getJobAndCompanies(id: string) {
     .order("category")
     .order("name")
 
+  // Transform job_skills data to skill_ids array for the form
+  const jobWithSkillIds = {
+    ...job,
+    skill_ids: job.job_skills?.map((js: any) => js.skill_id) || []
+  }
+
   return {
-    job,
+    job: jobWithSkillIds,
     companies: companies || [],
     skills: skills || []
   }

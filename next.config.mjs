@@ -9,6 +9,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Performance optimizations
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@supabase/supabase-js'],
+  },
+  // Enable compression
+  compress: true,
+  // Optimize builds
+  swcMinify: true,
 }
 
 export default nextConfig
